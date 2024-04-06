@@ -75,7 +75,7 @@ h6 {
 .hero {
   display: flex;
   gap: 50px;
-  padding-top: 120px;
+  padding-top: 200px;
   padding-bottom: 120px;
   position: relative;
 }
@@ -219,7 +219,7 @@ h6 {
 }
 .register-form {
   max-width: 1200px;
-  margin: 100px auto 20px auto;
+  margin: 0px auto 20px auto;
 }
 .login-form h2 {
   color: #000;
@@ -582,7 +582,7 @@ input[type="time"]:before {
   margin-right: 0.5em;
 }
 .logo-img{
-  width: 150px;
+  width: 180px;
 }
 footer .logo-img{
   width: 100%;

@@ -12,7 +12,7 @@ function Navbar() {
     <>
     <nav className={"container"}>
       <div className="logo">
-        <img src="/logo.png" alt="logo" className="logo-img" />
+        <img src="/logo2.png" alt="logo" className="logo-img" />
       </div>
       <div className={show ? "navLinks showmenu" : "navLinks"}>
         <div className="links">
