@@ -1,12 +1,12 @@
 
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import { toast } from "react-toastify";
 
 function AppointMentForm() {
-    // let navigate = useNavigate();
+     let navigate = useNavigate();
 
     let [patientData, setPatientData] = useState({
   
@@ -49,6 +49,7 @@ function AppointMentForm() {
           doctorName: "",
           appointmentTime: ""
         })
+        navigate('/')
   
       } catch (error) {
         let errorString = "";

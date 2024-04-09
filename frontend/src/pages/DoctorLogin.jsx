@@ -7,7 +7,7 @@ function DoctorLogin() {
   return (
     <>
     <div className="container form-component login-form">
-      <h2>Sign In</h2>
+      <h2>Hello Doctor !!</h2>
       <p>Please Login To Continue</p>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat culpa

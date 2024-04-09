@@ -7,6 +7,8 @@ function Pop({ setOpen }) {
     const handleLogin = () => {
         if (selectedRole) {
             navigate(`/login/${selectedRole}`);
+           // window.location.href = 'http://localhost:3010/users';
+          // window.location.href = `http://localhost:3333/${selectedRole}/dashboard`
             setOpen(false)
         }
     };
