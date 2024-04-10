@@ -21,9 +21,6 @@ function SingleReceptionist() {
     }, [referenceNo]);
   return (
     <div className="single-doctor-container">
-    <Link to="/receptionist" className="back">
-      BACK
-    </Link>
     <table className="single-doctor-table">
       <tbody>
         <tr>

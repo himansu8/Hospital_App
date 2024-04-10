@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 
-function Receptionist({ columns }) {
+function Receptionist({ columns, type }) {
     const [receptionist, setReceptionist] = useState([])
     let navigate = useNavigate();
     async function fetchReceptionist() {
@@ -27,42 +27,67 @@ function Receptionist({ columns }) {
             await axios.delete(`/api/receptionist/${referenceNo}`);
             let updatedReceptionist = receptionist.filter((ele) => ele._id !== referenceNo);
             setReceptionist(updatedReceptionist);             //Refersh the doctor database after deleted
-           //window.alert(`Successfully Deleted`)
+            //window.alert(`Successfully Deleted`)
             toast.success("Successfully Deleted")
         } catch (error) {
             console.log(error)
         }
     }
     function onClickHandler(referenceNo) {
-
-        navigate(
-            `/receptionist/${referenceNo}`,
-            {
-                state: {
-                    referenceNo
+        {
+            type === "admin" ? (
+                navigate(
+                    `/receptionist/${referenceNo}`,
+                    {
+                        state: {
+                            referenceNo
+                        }
+                    }
+                )
+            ) : (
+            navigate(
+                `/doc/receptionist/${referenceNo}`,
+                {
+                    state: {
+                        referenceNo
+                    }
                 }
-            }
+            )
         )
+        }
     }
-    function onClickHandler2(referenceNo,name,gender,email,mobile,address,password) {
-
-        navigate(
-            `/receptionist/edit/${referenceNo}`,
-            {
-                state: {
-                    referenceNo,name,gender,email,mobile,address,password
+    function onClickHandler2(referenceNo, name, gender, email, mobile, address, password) {
+        {
+            type === "admin" ? (
+                navigate(
+                    `/receptionist/edit/${referenceNo}`,
+                    {
+                        state: {
+                            referenceNo, name, gender, email, mobile, address, password
+                        }
+                    }
+                )
+            ) : (
+            navigate(
+                `/doc/receptionist/edit/${referenceNo}`,
+                {
+                    state: {
+                        referenceNo, name, gender, email, mobile, address, password
+                    }
                 }
-            }
+            )
         )
+        }
+
     }
     const actionColumn = [{
-         width: 250, renderCell: (params) => {
+        width: 250, renderCell: (params) => {
             return (
                 <div className="cellAction">
-                    
+
                     <button><div className="viewButton" onClick={() => onClickHandler(params.row._id)} >View</div></button>
-                    <button><div className="editButton" onClick={() => onClickHandler2(params.row._id, params.row.name,  params.row.gender, params.row.email, params.row.mobile, params.row.address, params.row.password)} >Edit</div></button>
-                 <button><div className="deleteButton" onClick={() => deleteReceptionist(params.row._id)}  >Delete</div></button>   
+                    <button><div className="editButton" onClick={() => onClickHandler2(params.row._id, params.row.name, params.row.gender, params.row.email, params.row.mobile, params.row.address, params.row.password)} >Edit</div></button>
+                    <button><div className="deleteButton" onClick={() => deleteReceptionist(params.row._id)}  >Delete</div></button>
                 </div>
             );
         },
@@ -70,12 +95,19 @@ function Receptionist({ columns }) {
     ];
 
 
-  return (
-    <div className='datatable'>
+    return (
+        <div className='datatable'>
             <div className="datatableTitle">
-                <Link to={'/receptionist/signup'} className='link'>
-                    Add New Receptionist
-                </Link>
+                {type === "admin" ? (
+                    <Link to={'/receptionist/signup'} className='link'>
+                        Add New Receptionist
+                    </Link>
+                ) : (
+                    <Link to={'/doc/receptionist/signup'} className='link'>
+                        Add New Receptionist
+                    </Link>
+                )}
+
             </div>
             {/* <DataGrid
                 className='datagrid'
@@ -99,7 +131,7 @@ function Receptionist({ columns }) {
                 getRowId={(row) => row._id}
             />
         </div>
-  )
+    )
 }
 
 export default Receptionist

@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom"
 import './updatereceptionist.scss'
 import { toast } from "react-toastify";
 
-function UpdateReceptionist() {
+function UpdateReceptionist({type}) {
     let navigate = useNavigate();
     const { state } = useLocation();
     const { referenceNo, name, gender, email, mobile, address, password } = state;
@@ -32,7 +32,9 @@ function UpdateReceptionist() {
             console.log(res.data)
             //window.alert("Updated Successfully")
             toast.success("Updated successfully")
-            navigate("/receptionist")
+            if(type == "admin"){navigate("/receptionist")}
+            if(type == "doctor"){navigate("/doc/receptionist")}
+
         } catch (error) {
             let errorString = "";
             if (error.response.data.errors) {

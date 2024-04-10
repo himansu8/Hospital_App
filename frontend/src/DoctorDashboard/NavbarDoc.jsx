@@ -1,9 +1,9 @@
 import { useContext } from 'react'
-import './navbar.scss'
+import './navbardoc.scss'
 import { AuthContext } from '../context/AuthContext'
 
 
-function Navbar1() {
+function NavbarDoc() {
   const { user } = useContext(AuthContext)
   return (
     <>
@@ -26,4 +26,4 @@ function Navbar1() {
   )
 }
 
-export default Navbar1
+export default NavbarDoc

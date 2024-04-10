@@ -6,10 +6,10 @@ import axios from 'axios'
 import { toast } from "react-toastify";
 
 
-function ReceptionistSignup() {
+function ReceptionistSignup({type}) {
 
   let navigate = useNavigate();
-  const { user, dispatch } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   let [data, setData] = useState({
     name:"",
     userName:"",
@@ -35,9 +35,10 @@ function ReceptionistSignup() {
       console.log(data);
       let res = await axios.post('/api/receptionist/signup', data)
       console.log(res.data)
-      const confirmed = window.confirm("Are you submited doctor signup form?");
+      const confirmed = window.confirm("Are you submited the signup form?");
       if (!confirmed) return;
-      window.alert("Thank You")
+      toast.success("Successfully Registered! Thank You")
+      //window.alert("Thank You")
       setData({
         name:"",
         userName:"",
@@ -48,7 +49,9 @@ function ReceptionistSignup() {
         address:"",
         addedBy:""
       })
-      navigate("/receptionist")
+      if( type==="admin"){navigate("/receptionist")}
+      if( type==="doctor"){navigate("/doc/receptionist")}
+
 
     } catch (error) {
       let errorString = "";
@@ -134,12 +137,18 @@ function ReceptionistSignup() {
             }}
           >
             <p style={{ marginBottom: 0 }}>Already Registered?</p>
-            <Link
+            {type === "admin" ? ( <Link
               to={"/admin/dashboard"}
               style={{ textDecoration: "none", color: "#271776ca" }}
             >
               Dashboard
-            </Link>
+            </Link>):(   <Link
+              to={"/doctor/dashboard"}
+              style={{ textDecoration: "none", color: "#271776ca" }}
+            >
+              Dashboard
+            </Link>) }
+         
           </div>
           <div style={{ justifyContent: "center", alignItems: "center" }}>
             <button type="submit" onClick={onSubmit} style={{ cursor: "pointer" }}>Register</button>

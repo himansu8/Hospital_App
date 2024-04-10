@@ -1,9 +1,71 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { toast } from "react-toastify";
+import {AuthContext} from '../context/AuthContext'
 
 
 function DoctorLogin() {
+  let navigate = useNavigate()
 
+  let [doctorData, setDoctorData] = useState({
+      email: undefined,
+      password: undefined
+  })
+  const { error, dispatch } = useContext(AuthContext)
+
+  const { email, password } = doctorData
+
+  function onChangeHandler(e) {
+    setDoctorData({
+          ...doctorData,
+          [e.target.name]: e.target.value
+      })
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    dispatch({ type: "LOGIN_START" })
+      try {
+          // console.log(patientData);
+          let res = await axios.post('/api/doctor/login', doctorData)
+          // console.log(res.data)
+          dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details })
+          toast.success("You are Loged In !")
+          //localStorage.setItem("token", JSON.stringify({ token: res.data.token }))
+          navigate('/doctor/dashboard');
+         //window.location.href = `http://localhost:3333/admin/dashboard`
+      } catch (error) {
+        dispatch({ type: "LOGIN_failure", payload: error.response.data })
+          let errorString = "";
+    //handling express validator errors
+    if (error.response.data.errors) {
+      error.response.data.errors.forEach((ele) => {
+        errorString += `${ele.msg} `
+      })
+      // showAlert({
+      //   type: "error",
+      //   msg: errorString
+      // })
+      toast.error(errorString);
+      //window.alert(errorString)
+
+    }
+    else {
+      //Custom errors
+      errorString = error.response.data.error;
+      // showAlert({
+      //   type: "error",
+      //   msg: errorString
+      // })
+      toast.error(errorString);
+      //window.alert(errorString)
+
+    }
+  }
+  }
   return (
     <>
     <div className="container form-component login-form">
@@ -14,18 +76,9 @@ function DoctorLogin() {
         voluptas expedita itaque ex, totam ad quod error?
       </p>
       <form >
-        <input
-          type="text"
-          placeholder="Email"
-        //   value={email}
-        //   onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-        //   value={password}
-        //   onChange={(e) => setPassword(e.target.value)}
-        />
+      <input type="email" placeholder="Email" name="email" onChange={onChangeHandler} value={email} />
+      <input type="password" placeholder="Password" name="password" onChange={onChangeHandler} value={password} />
+
 
         <div
           style={{
@@ -43,7 +96,7 @@ function DoctorLogin() {
           </Link>
         </div>
         <div  style={{ justifyContent: "center", alignItems: "center" }}>
-          <button type="submit" >Login</button>
+          <button type="submit"  onClick={onSubmit} >Login</button>
         </div>
       </form>
     </div>

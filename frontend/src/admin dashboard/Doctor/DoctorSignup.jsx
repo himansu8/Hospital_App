@@ -7,7 +7,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 function DoctorSignup() {
      let navigate = useNavigate();
-    const { user, dispatch } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     let [doctorData, setDoctorData] = useState({
 
         name: "",

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './updatepatient.scss'
 import { toast } from "react-toastify";
-function UpdatePatient() {
+function UpdatePatient({ type }) {
   let navigate = useNavigate();
   const { state } = useLocation();
 
@@ -36,7 +36,10 @@ function UpdatePatient() {
       console.log(res.data);
       //window.alert("Updated successfully");
       toast.success("Updated successfully")
-      navigate("/patient");
+      if (type == "admin") { navigate("/patient") }
+      if (type == "doctor") { navigate("/doc/patient") }
+      if (type == "recep") { navigate("/recep/patient") }
+
     } catch (error) {
       let errorString = "";
       if (error.response.data.errors) {
@@ -48,8 +51,8 @@ function UpdatePatient() {
 
       } else {
         errorString = error.response.data.error;
-       // window.alert(errorString);
-       toast.error(errorString)
+        // window.alert(errorString);
+        toast.error(errorString)
 
       }
     }
@@ -97,8 +100,8 @@ function UpdatePatient() {
             <option value="Pediatrics">Pediatrics</option>
             <option value="Physical Therapy">Physical Therapy</option>
             <option value="Radiology">Radiology</option>
-          </select>        
-          </label>
+          </select>
+        </label>
         <br />
         <label>
           <b>Doctor Name</b><br />

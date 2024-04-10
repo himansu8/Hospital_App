@@ -24,9 +24,6 @@ function SinglePatient() {
    
     return (
         <div className="single-doctor-container">
-    <Link to="/patient" className="back">
-      BACK
-    </Link>
     <table className="single-doctor-table">
       <tbody>
         <tr>

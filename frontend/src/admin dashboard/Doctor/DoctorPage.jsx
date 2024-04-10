@@ -5,10 +5,10 @@ import Navbar1 from '../../DashBoard/Navbar1'
 import Doctor from '../../DashBoard/Doctor'
 
 
-function DoctorPage({ columns }) {
+function DoctorPage({ columns,type }) {
     return (
         <div className='list'>
-            <Sidebar />
+            <Sidebar type={type} />
             <div className="listContainer">
                 <Navbar1 />
                 <Doctor columns={columns} />
