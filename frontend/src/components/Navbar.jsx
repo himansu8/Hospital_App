@@ -1,51 +1,53 @@
-import React, { useState } from 'react'
-import { Link} from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import Pop from './Pop';
-
-
-
+import { FaHospital } from 'react-icons/fa';
 function Navbar() {
-  const [open, setOpen] = useState(false)
-    const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const toggleMenu = () => {
+    setShow(!show);
+  };
+
   return (
     <>
-    <nav className={"container"}>
-      <div className="logo">
-        <img src="/logo2.png" alt="logo" className="logo-img" />
-      </div>
-      <div className={show ? "navLinks showmenu" : "navLinks"}>
-        <div className="links">
-          <Link to={"/"} onClick={() => setShow(!show)}>
-            Home
-          </Link>
-          <Link to={"/appointment"} onClick={() => setShow(!show)}>
-            Appointment
-          </Link>
-          <Link to={"/about"} onClick={() => setShow(!show)}>
-            About Us
-          </Link>
+      <nav className={'container'}>
+        {/* <div className="logo">
+          <img src="/logo2.png" alt="logo" className="logo-img" />
+        </div> */}
+        <div className="logo" style={{ color: '#007bff', textDecoration: 'none', display: 'flex', alignItems: 'center', fontSize: '24px' }}>
+          <FaHospital style={{ marginRight: '10px', fontSize: '36px' }} />
+          <span style={{ fontSize: '28px', fontWeight: 'bold' }}>ApnaHospital</span>
         </div>
-        {/* {isAuthenticated ? (
-          <button className="logoutBtn btn" onClick={handleLogout}>
-            LOGOUT
-          </button>
-        ) : (
-          <button className="loginBtn btn" onClick={goToLogin}>
+        <div className={show ? 'navLinks showmenu' : 'navLinks'}>
+          <div className="links">
+            <Link to={'/'} onClick={toggleMenu}>
+              Home
+            </Link>
+            <Link to={'/appointment'} onClick={toggleMenu}>
+              Appointment
+            </Link>
+            <Link to={'/about'} onClick={toggleMenu}>
+              About Us
+            </Link>
+          </div>
+          <button
+            className="loginBtn btn"
+            onClick={() => setOpen(true)}
+            style={{ cursor: 'pointer' }}
+          >
             LOGIN
           </button>
-        )} */}
-         <button className="loginBtn btn" onClick={() => setOpen(true)} style={{cursor:"pointer" }}>
-            LOGIN
-          </button>
-      </div>
-      <div className="hamburger" onClick={() => setShow(!show)}>
-        <GiHamburgerMenu />
-      </div>
-    </nav>
-    {open && <Pop setOpen={setOpen} />}
-  </>
-  )
+        </div>
+        <div className="hamburger" onClick={toggleMenu}>
+          <GiHamburgerMenu />
+        </div>
+      </nav>
+      {open && <Pop setOpen={setOpen} />}
+    </>
+  );
 }
 
-export default Navbar
+export default Navbar;

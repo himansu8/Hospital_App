@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -86,13 +86,13 @@ function AdminLogin() {
             flexDirection: "row",
           }}
         >
-          <p style={{ marginBottom: 0 }}>Not Registered?</p>
+          {/* <p style={{ marginBottom: 0 }}>Not Registered?</p>
           <Link
             to={"/register"}
             style={{ textDecoration: "none", color: "#271776ca" }}
           >
             Register Now
-          </Link>
+          </Link> */}
         </div>
         <div  style={{ justifyContent: "center", alignItems: "center" }}>
           <button type="submit" onClick={onSubmit}>Login</button>

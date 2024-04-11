@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaLocationArrow, FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
+import { FaHospital } from 'react-icons/fa';
 
 function Footer() {
         const hours = [
@@ -42,8 +43,12 @@ function Footer() {
     <footer className={"container"}>
       <hr />
       <div className="content">
-        <div>
+        {/* <div>
           <img src="/logo2.png" alt="logo" className="logo-img"/>
+        </div> */}
+                <div className="logo" style={{ color: '#007bff', textDecoration: 'none', display: 'flex', alignItems: 'center', fontSize: '24px' }}>
+          <FaHospital style={{ marginRight: '10px', fontSize: '36px' }} />
+          <span style={{ fontSize: '24px', fontWeight: 'bold' }}>ApnaHospital</span>
         </div>
         <div>
           <h4>Quick Links</h4>

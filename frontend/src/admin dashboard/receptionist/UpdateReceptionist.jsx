@@ -32,8 +32,8 @@ function UpdateReceptionist({type}) {
             console.log(res.data)
             //window.alert("Updated Successfully")
             toast.success("Updated successfully")
-            if(type == "admin"){navigate("/receptionist")}
-            if(type == "doctor"){navigate("/doc/receptionist")}
+            if(type === "admin"){navigate("/receptionist")}
+            if(type === "doctor"){navigate("/doc/receptionist")}
 
         } catch (error) {
             let errorString = "";

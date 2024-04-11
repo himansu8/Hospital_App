@@ -6,7 +6,7 @@ function About() {
   return (
     <>
     <Hero
-      title={"Learn More About Us | Apna Hospital | ଆମେ ସବବେଳେ ଆପଣ ଆପଣଙ୍କର ସେବା ରେ ନିଓଜିତ"}
+      title={"Learn More About Us | Apna Hospital | ଆମେ ସବୁବେଳେ ଆପଣଙ୍କ ସେବା ରେ ନିଓଜିତ"}
       imgUrl={"/about.png"}
     />
     <Biography imgUrl={"/whoweare.png"} />

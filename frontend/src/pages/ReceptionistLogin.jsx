@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import { toast } from "react-toastify";
@@ -12,7 +12,7 @@ function ReceptionistLogin() {
     email: undefined,
     password: undefined
   })
-  const { error, dispatch } = useContext(AuthContext)
+  const {  dispatch } = useContext(AuthContext)
 
   const { email, password } = data
 
@@ -67,13 +67,13 @@ function ReceptionistLogin() {
               flexDirection: "row",
             }}
           >
-            <p style={{ marginBottom: 0 }}>Not Registered?</p>
-            <Link
+            {/* <p style={{ marginBottom: 0 }}>Not Registered?</p> */}
+            {/* <Link
               to={"/register"}
               style={{ textDecoration: "none", color: "#271776ca" }}
             >
               Register Now
-            </Link>
+            </Link> */}
           </div>
           <div style={{ justifyContent: "center", alignItems: "center" }}>
             <button type="submit" onClick={onSubmit} >Login</button>
