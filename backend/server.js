@@ -5,10 +5,14 @@ import receptionRoutes from "./routes/receptionist_routes.js"
 import doctorRoutes from "./routes/doctor_routes.js"
 import deanRoutes from "./routes/dean_routes.js"
 import messageRoutes from "./routes/message_routes.js"
+import cookieParser from 'cookie-parser';
+
 
 const app = express();
 const port = 3001;
 
+
+app.use(cookieParser())
 app.use(express.json());
 
 // app.get('/',(req,res)=>{

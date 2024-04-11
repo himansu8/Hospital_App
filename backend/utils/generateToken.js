@@ -5,14 +5,18 @@ import config from '../config/config.js';
 
 const private_key = config.PRIVATE_KEY
 
-export default function generateToken(payload) {
+// export default function generateToken(payload) {
 
-    const token = jwt.sign(payload, private_key);
-    //const token = jwt.sign(payload, private_key,{expiresIn})
+//     const token = jwt.sign(payload, private_key);
+//     //const token = jwt.sign(payload, private_key,{expiresIn})
 
-    // console.log("Encode JWT----->>>>");
-    // console.log(token);
+//     // console.log("Encode JWT----->>>>");
+//     // console.log(token);
+//     return token;
+// }
+
+function generationToken(payload) {
+    const token = jwt.sign(payload, private_key)
     return token;
 }
-
-
+export default generationToken;

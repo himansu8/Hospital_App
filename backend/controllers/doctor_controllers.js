@@ -1,8 +1,10 @@
 import Doctormodel from "../models/doctor_model.js";
 import bcrypt from "bcrypt";
-import generateToken from "../utils/generateToken.js";
+//import generateToken from "../utils/generateToken.js";
 import sendMail from "../email.js";
 import mongoose from "mongoose";
+import config from "../config/config.js";
+import jwt from "jsonwebtoken"
 
 
 
@@ -35,7 +37,7 @@ export const doctorSignup = async (req, res) => {
             mobile,
             address,
             department,
-            addedByDean : req.payload.role
+            addedByDean,
         }
 
         await Doctormodel.create(doctorData)
@@ -64,7 +66,7 @@ export const doctorSignup = async (req, res) => {
 export const doctorLogin = async (req, res) => {
 
     try {
-        const { email, password } = req.body;
+        var { email, password } = req.body;
 
         let doctorFound = await Doctormodel.findOne({ email: email })
 
@@ -88,15 +90,25 @@ export const doctorLogin = async (req, res) => {
 
         // }
 
-        let payload = {
-            user_id: doctorFound._id,
-            role: "doctor"
-        }
-        // console.log(payload)
-        let token = generateToken(payload)
-        //console.log(token)
+        // let payload = {
+        //     user_id: doctorFound._id,
+        //     role: "doctor"
+        // }
+        // // console.log(payload)
+        // let token = generateToken(payload)
+        // //console.log(token)
 
-        res.status(200).json({ msg: `Dr ${doctorFound.name} you are logged in`, token })
+        // res.status(200).json({ msg: `Dr ${doctorFound.name} you are logged in`, token })
+        const token = jwt.sign(
+            { user_id: doctorFound._id, role: "doctor" },
+            config.PRIVATE_KEY
+        );
+        //console.log(deanFound)
+        var { password, ...otherDetails } = doctorFound._doc;
+
+        res.cookie("access_token", token, {
+            httpOnly: true,
+        }).status(200).json({ details: { ...otherDetails } });
     }
     catch (error) {
         console.log(error);
@@ -108,7 +120,7 @@ export async function viewDoctorData(req, res) {
     try {
         const { doctorId } = req.params
         if (!mongoose.isValidObjectId(doctorId)) {
-            return res.status(400).json({ error: "please pass valid doctor id" })
+            return res.status(400).json({ error: "please pass valid doctor id " })
         }
         let doctotData = await Doctormodel.findById(doctorId);
         if (!Doctormodel) {
@@ -210,3 +222,13 @@ export async function allDoctorData(req, res) {
         return res.status(500).json({ error: "Something went wrong" })
     }
 }
+
+export const logoutTokenDoc = async (req, res, next) => {
+    try{
+      res.clearCookie('access_token'); 
+      res.status(201).send('Token removed successfully')
+    }
+    catch(error){
+      next(error)
+    }
+    }

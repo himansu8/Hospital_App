@@ -34,6 +34,10 @@ const deanSchema = new Schema({
     address: {
         type: String,
         required: true,
+    },
+    role: {
+        type: String,
+        default: "admin",
     }
 })
 

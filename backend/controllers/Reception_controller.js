@@ -4,13 +4,15 @@ import Deanmodel from "../models/dean_model.js";
 import bcrypt from "bcrypt";
 import sendMail from "../email.js";
 import mongoose from "mongoose";
+import config from "../config/config.js";
+import jwt from "jsonwebtoken"
 
 export const receptionistSignup = async (req, res) => {
     try {
-        let { name, userName, password, gender, email, mobile, address } = req.body;
+        let { name, userName, password, gender, email, mobile, address, addedBy } = req.body;
 
-        let doctorFound = await doctorModel.findById(req.payload.user_id) 
-        let deanFound = await Deanmodel.findById(req.payload.user_id)
+        let doctorFound = await doctorModel.findById(req.user.user_id) 
+        let deanFound = await Deanmodel.findById(req.user.user_id)
 
         if (doctorFound || deanFound){
             let userNameFound = await ReceiptionsModel.findOne({ userName: userName })
@@ -36,7 +38,7 @@ export const receptionistSignup = async (req, res) => {
             email,
             mobile,
             address,
-            // addedBy: userFound.name
+            addedBy
         }
 
         await ReceiptionsModel.create(receptionistData)
@@ -68,7 +70,7 @@ export const receptionistSignup = async (req, res) => {
 
 export const receptionistLogin = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        var { email, password } = req.body;
         let emailFound = await ReceiptionsModel.findOne({ email: email });
         if (!emailFound) {
             return res.status(401).json({ error: 'Incorrect email id' })
@@ -77,7 +79,17 @@ export const receptionistLogin = async (req, res) => {
         if (!matchPassword) {
             return res.status(401).json({ error: 'Incorrect password' })
         }
-        res.status(200).json({ msg: `${emailFound.name} was login successfully` })
+        const token = jwt.sign(
+            { user_id: emailFound._id, role: "receptionist" },
+            config.PRIVATE_KEY
+        );
+        //console.log(deanFound)
+        var { password, ...otherDetails } = emailFound._doc;
+
+        res.cookie("access_token", token, {
+            httpOnly: true,
+        }).status(200).json({ details: { ...otherDetails } });
+       // res.status(200).json({ msg: `${emailFound.name} was login successfully` })
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: "something error in login" })
@@ -171,3 +183,13 @@ export const updateReceptionist = async (req, res) => {
         res.status(500).send({ error: "Some thing went wrong while update the Receptioninst" })
     }
 }
+
+export const logoutTokenRecep = async (req, res, next) => {
+    try{
+      res.clearCookie('access_token'); 
+      res.status(201).send('Token removed successfully')
+    }
+    catch(error){
+      next(error)
+    }
+    }

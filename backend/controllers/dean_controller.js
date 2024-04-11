@@ -1,9 +1,9 @@
 import Deanmodel from "../models/dean_model.js";
-import generateToken from "../utils/generateToken.js";
+//import generateToken from "../utils/generateToken.js";
 import bcrypt from "bcrypt";
 import sendMail from "../email.js";
-
-
+import jwt from "jsonwebtoken"
+import config from "../config/config.js";
 export const deanSignup = async (req, res) => {
     try {
         let { name, userName, password, gender, email, mobile, address } = req.body;
@@ -23,16 +23,16 @@ export const deanSignup = async (req, res) => {
         password = await bcrypt.hash(password, 12)
 
         const deanData = {
-            name, 
-            userName, 
-            password, 
-            gender, 
-            email, 
-            mobile, 
+            name,
+            userName,
+            password,
+            gender,
+            email,
+            mobile,
             address
         }
 
-       await Deanmodel.create(deanData)
+        await Deanmodel.create(deanData)
 
         res.status(200).json({ msg: `Successfully created Dean Mr/Mrs ${deanData.name}` })
         let usermailBody = {
@@ -58,16 +58,16 @@ export const deanSignup = async (req, res) => {
 export const deanLogin = async (req, res) => {
 
     try {
-        const { email, password } = req.body;
+        var { email, password } = req.body;
 
-        let deanFound = await Deanmodel.findOne({ email : email })
+        let deanFound = await Deanmodel.findOne({ email: email })
 
         //  console.log(deanFound)
         if (!deanFound) {
-            return res.status(409).json({error:`${email} not found `})
+            return res.status(409).json({ error: `${email} not found ` })
         }
 
-        
+
         let matchPassword = await bcrypt.compare(password, deanFound.password);
         if (!matchPassword) {
             return res.status(401).json({ error: "Invalid password" })
@@ -79,21 +79,44 @@ export const deanLogin = async (req, res) => {
 
         // if(emailFound.isVerified.phone == false){
         //     return res.status(404).json({err : "phone not verified"})
-        
+
         // }
 
-        let payload = {
-            user_id: deanFound._id,
-            role : "dean"
-        }
-        // console.log(payload)
-        let token = generateToken(payload)
-        //console.log(token)
-        
-        res.status(200).json({ msg: `Dr ${deanFound.name} you are logged in`, token })
+        // let payload = {
+        //     user_id: deanFound._id,
+        //     role : "dean"
+        // }
+        // // console.log(payload)
+        // let token = generateToken(payload)
+        // //console.log(token)
+        // res.status(200).send({ msg: `Dr ${deanFound.name} you are logged in`, token })
+
+        // res.status(200).json({ msg: {deanFound}, token })
+        const token = jwt.sign(
+            { user_id: deanFound._id, role: "dean" },
+            config.PRIVATE_KEY
+        );
+        //console.log(deanFound)
+        var { password, ...otherDetails } = deanFound._doc;
+
+        res.cookie("access_token", token, {
+            httpOnly: true,
+        }).status(200).json({ details: { ...otherDetails } });
+
+
     }
     catch (error) {
         console.log(error);
         res.status(500).json({ error: " something went wrong in dean Login" })
     }
 }
+
+export const logoutToken = async (req, res, next) => {
+    try{
+      res.clearCookie('access_token'); 
+      res.status(201).send('Token removed successfully')
+    }
+    catch(error){
+      next(error)
+    }
+    }

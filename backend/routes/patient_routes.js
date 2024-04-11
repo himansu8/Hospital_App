@@ -1,6 +1,7 @@
 import express from 'express';
 import {createPatient, viewyourData, updatePatientData, allPatient} from '../controllers/patient_controller.js';
 import {validationErrors, patientCreateValidation} from '../middlewares/validation.js'
+import { verifyAdmin } from '../middlewares/verifyToken.js';
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ method :get
 api_url: api/patient/:referenceNo
 */
 
-router.get('/:referenceNo',viewyourData);
+router.get('/:referenceNo',verifyAdmin,viewyourData);
 
 /*
 description: update patient data

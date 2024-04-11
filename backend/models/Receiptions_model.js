@@ -35,11 +35,15 @@ const ReceptionistsSchema = new Schema({
     address : {
         type: String,
         required: true,
+    },
+    addedBy : {
+        type: String,
+        required: true,
+    },
+    role: {
+        type: String,
+        default: "receptionist",
     }
-    // addedBy : {
-    //     type: String,
-    //     required: true,
-    // }
 })
 
 export default mongoose.model('ReceptionistsModel', ReceptionistsSchema, "Receptionists")
