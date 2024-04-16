@@ -1,6 +1,6 @@
 
 export const doctorColumns = [
-   { field: "_id", headerName: "ID", width: 250 },
+  //  { field: "_id", headerName: "ID", width: 250 },
   {
     field: "user",
     headerName: "User",
@@ -48,7 +48,7 @@ export const doctorColumns = [
 
 
 export const receptionistColumns = [
-   { field: "_id", headerName: "ID", width: 250 },
+  //  { field: "_id", headerName: "ID", width: 250 },
   {
     field: "user",
     headerName: "User",
@@ -88,7 +88,7 @@ export const receptionistColumns = [
 
 
 export const patientColumns = [
-   { field: "_id", headerName: "ID", width: 100 },
+  //  { field: "_id", headerName: "ID", width: 100 },
   {
     field: "user",
     headerName: "User",
