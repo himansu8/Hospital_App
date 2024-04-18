@@ -7,12 +7,17 @@ import NavbarRecep from '../../receptionist dashboard/NavbarRecep'
 import SidebarRecep from '../../receptionist dashboard/SidebarRecep'
 import NavbarDoc from '../../DoctorDashboard/NavbarDoc'
 import SidebarDoc from '../../DoctorDashboard/SidebarDoc'
+
+// shabbir sir 
+
+
+
 function AdminPage({type}) {
   return (
 <div className='AdminPage'>
       {type === "admin" && (
         <>
-          <Sidebar type={type} />
+          <Sidebar type={type} />  
           <div className="admincontainer">
             <Navbar1 />
             <AdminDashBoard />
