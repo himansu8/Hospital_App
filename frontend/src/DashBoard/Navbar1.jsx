@@ -16,7 +16,7 @@ function Navbar1() {
               alt="" className="avatar" />
           </div> */}
           <div className="item">
-            <h3>Hello!! {user.name}</h3>
+            <h3 className='sm-f-24'>Hello!! {user.name}</h3>
           </div>
         </div>
       </div>

@@ -53,7 +53,7 @@ function AdminDashBoard() {
     <>
       <div className='admindashboard'>
         <div className="header">
-          <h1>Welcome to Apna Hospital</h1>
+          <h1 className='sm-f-24'>Welcome to Apna Hospital</h1>
         </div>
         <div className="logo">
         <img src="/logo1.png" alt="logo" className="logo-img" />

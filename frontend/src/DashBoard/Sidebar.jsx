@@ -12,14 +12,6 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios'
 
-
-
-// shabbir sir 
-
-
-
-
-
 function Sidebar() {
   const { user, dispatch } = useContext(AuthContext)
   let navigate = useNavigate()
@@ -39,7 +31,7 @@ function Sidebar() {
     <div className='sidebar'>
       <div className="top">
         <Link to={'/admin/dashboard'} style={{ textDecoration: "none" }}>
-          <span className="logo">admin</span>
+          <span className="logo w-[2px]">admin</span>
         </Link>
       </div>
       <hr />
@@ -57,42 +49,42 @@ function Sidebar() {
           <Link to={'/doctor'} style={{ textDecoration: "none" }}>
             <li>
               <FaUserDoctor className='icon' />
-              <span>Doctor</span>
+              <span className='hide-on-small-devices'>Doctor</span>
             </li>
           </Link>
           <Link to={'/receptionist'} style={{ textDecoration: "none" }}>
             <li>
               <MdAccessibility className='icon' />
-              <span>Receptionist</span>
+              <span className='hide-on-small-devices'>Receptionist</span>
             </li>
           </Link>
           <Link to={'/patient'} style={{ textDecoration: "none" }}>
             <li>
               <FaUserInjured className='icon' />
-              <span>Patient</span>
+              <span className='hide-on-small-devices'>Patient</span>
             </li>
           </Link>
           <p className="title">Message</p>
           <Link to={'/messages'} style={{ textDecoration: "none" }}>
           <li>
             <MessageIcon className='icon' />
-            <span>Message</span>
+            <span className='hide-on-small-devices'>Message</span>
           </li>
           </Link>
           <li>
             <NotificationsOutlinedIcon className='icon' />
-            <span>Notifications</span>
+            <span className='hide-on-small-devices'>Notifications</span>
           </li>
 
           <p className="title">USER</p>
 
           <li>
             <AccountCircleOutlinedIcon className='icon' />
-            <span> {user.name} </span>
+            <span className='hide-on-small-devices'> {user.name} </span>
           </li>
           <li>
             <ExitToAppIcon className='icon' />
-            <span  onClick={handleLogout}>Log Out</span>
+            <span className='hide-on-small-devices' onClick={handleLogout}>Log Out</span>
           </li>
         </ul>
       </div>
