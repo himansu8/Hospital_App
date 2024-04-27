@@ -11,15 +11,7 @@ import { MdAccessibility } from 'react-icons/md';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios'
-
-
-
-// shabbir sir 
-
-
-
-
-
+// shabbir sir
 function Sidebar() {
   const { user, dispatch } = useContext(AuthContext)
   let navigate = useNavigate()
