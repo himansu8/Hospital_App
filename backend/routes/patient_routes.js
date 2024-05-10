@@ -1,5 +1,5 @@
 import express from 'express';
-import {createPatient, viewyourData, updatePatientData, allPatient} from '../controllers/patient_controller.js';
+import {createPatient, viewyourData, updatePatientData, allPatient, search} from '../controllers/patient_controller.js';
 import {validationErrors, patientCreateValidation} from '../middlewares/validation.js'
 import { verifyAdmin } from '../middlewares/verifyToken.js';
 
@@ -36,4 +36,7 @@ api_url: api/patient
 router.get('/', allPatient );
 
 
-export default router;
+router.get('/data/search', search );
+
+
+export default router; 

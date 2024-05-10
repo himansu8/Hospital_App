@@ -13,7 +13,7 @@ const patientSchema = new Schema({
         enum:["male","female"]
     },
     mobileNumber: {
-        type: String,
+        type: Number,
         required: true
     },
     address: {

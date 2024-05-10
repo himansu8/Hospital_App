@@ -5,7 +5,7 @@ function patientCreateValidation(){
     return [
         body('patientName', 'Patient name doesnot blank').notEmpty(),
         body('gender', 'Patient gender doesnot blank').notEmpty(),
-        body('mobileNumber', 'Phone number is invalid').notEmpty().isLength({ min: 13, max: 13 }),
+        body('mobileNumber', 'Phone number is invalid').notEmpty().isLength({ min: 10, max: 10 }),
         body('address', 'Patient address doesnot blank').notEmpty(),
         body('email', 'Patient email is invalid').isEmail(),
         body('aadhar', 'Patient adhar number doesnot blank').notEmpty(),
@@ -20,7 +20,7 @@ function doctorSignupValidation(){
         body('userName', 'Doctor username doesnot blank').notEmpty(),
         body('password', 'password is not strong').notEmpty().isStrongPassword(),
         body('gender', 'gender doesnot blank').notEmpty(),
-        body('mobile', 'Phone number is invalid').notEmpty().isLength({ min: 13, max: 13 }),
+        body('mobile', 'Phone number is invalid').notEmpty().isLength({ min: 10, max: 10 }),
         body('address', 'Address doesnot blank').notEmpty(),
         body('email', 'email is invalid').isEmail(),
         body('department', 'Deapartment doesnot blank').notEmpty(),
@@ -44,10 +44,9 @@ function receptionistSignupValidation(){
         body('userName', 'username doesnot blank').notEmpty(),
         body('password', 'password is not strong').notEmpty().isStrongPassword(),
         body('gender', 'gender doesnot blank').notEmpty(),
-        body('mobile', 'Phone number is invalid').notEmpty().isLength({ min: 13, max: 13 }),
+        body('mobile', 'Phone number is invalid').notEmpty().isLength({ min: 10, max: 10 }),
         body('address', 'address doesnot blank').notEmpty(),
         body('email', 'email is invalid').isEmail()
-  
     ]
 }
 function receptionistLoginValidation(){

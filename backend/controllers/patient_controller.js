@@ -107,3 +107,22 @@ export async function allPatient(req, res) {
         return res.status(500).json({ error: "Something went wrong" })
     }
 }
+
+export async function search (req, res){
+    try {
+        const {mobileNumber} = req.query;
+        //console.log(req)
+        if (!mobileNumber){
+            return res.status(400).json({error:"Mobile Number is Required"})
+        }
+        const patient =  await patientModel.findOne({mobileNumber})
+        console.log(patient)
+        if (!patient){
+            return res.status(400).json({error:"Patient not found with the provided mobile number"})
+        }
+        res.status(200).json(patient)
+    } catch (error) {
+        console.log(error)
+    }
+
+}
