@@ -10,8 +10,6 @@ import SidebarDoc from '../../DoctorDashboard/SidebarDoc'
 
 // shabbir sir 
 
-
-
 function AdminPage({type}) {
   return (
 <div className='AdminPage'>

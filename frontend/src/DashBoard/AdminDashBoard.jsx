@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './admindashboard.scss';
 import axios from 'axios';
 import moment from 'moment';
+import Patientdata from '../components/Patientdata';
 
 function AdminDashBoard() {
   const [doctorData, setDoctorData] = useState([]);
@@ -9,6 +10,34 @@ function AdminDashBoard() {
   const [patient, setPatient] = useState([]);
   const [currentTime, setCurrentTime] = useState('');
 
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [patientData, setPatientData] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const toggleMenu = () => {
+    setShow(!show);
+  };
+
+  const [error, setError] = useState('');
+
+    const handleSearch = async () => {
+        try {
+            const response = await axios.get(`/api/patient/data/search?mobileNumber=${mobileNumber}`);
+
+            if (response.status === 200) {
+                setPatientData(response.data);
+                setError('');
+            } else {
+                setError('Patient not found');
+                setPatientData(null);
+            }
+        } catch (error) {
+            console.error(error);
+            setError('Something went wrong');
+            setPatientData(null);
+        }
+    };
   async function fetchDoctor() {
     try {
       let res = await axios.get('/api/doctor');
@@ -51,13 +80,18 @@ function AdminDashBoard() {
 
   return (
     <>
+      
       <div className='admindashboard'>
+      <div className='searchPatient'>
+        <input type='text' placeholder='Patient mobile number' value={mobileNumber} onChange={(e)=> setMobileNumber(e.target.value)}></input>
+        <button className='searchBtn'  onClick={() =>{handleSearch(); setOpen(true);}}>Search</button>
+      </div>
         <div className="header">
-          <h1>Welcome to Apna Hospital</h1>
+          <h1 className='sm-f-24' style={{marginTop:"10PX"}}>Welcome to Apna Hospital</h1>
         </div>
         <div className="logo">
-        <img src="/logo1.png" alt="logo" className="logo-img" />
-      </div>
+          <img src="/logo1.png" alt="logo" className="logo-img" />
+        </div>
         <div className="content">
           <div className="stats">
             <div className="stat">
@@ -73,16 +107,17 @@ function AdminDashBoard() {
               <p>{patient.length}</p>
             </div>
           </div>
-          <div className="summary">
+          {/* <div className="summary">
             <h2>Summary</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac libero a velit fermentum efficitur.</p>
-          </div>
+          </div> */}
           <div className="current-time">
             <h2>Date and Time</h2>
             <p>{currentTime}</p>
           </div>
         </div>
       </div>
+      {open && <Patientdata setOpen={setOpen} patientData={patientData} error={error} />}
     </>
   );
 }

@@ -21,7 +21,7 @@ function Patient({ columns, type }) {
     }, [])
 
     function onClickHandler(referenceNo) {
-        if (type == "admin") {
+        if (type === "admin") {
             navigate(
                 `/patient/${referenceNo}`,
                 {
@@ -31,7 +31,7 @@ function Patient({ columns, type }) {
                 }
             )
         }
-        if (type == "doctor") {
+        if (type === "doctor") {
             navigate(
                 `/doc/patient/${referenceNo}`,
                 {
@@ -41,7 +41,7 @@ function Patient({ columns, type }) {
                 }
             )
         }
-        if (type == "recep") {
+        if (type === "recep") {
             navigate(
                 `/recep/patient/${referenceNo}`,
                 {
@@ -54,7 +54,7 @@ function Patient({ columns, type }) {
 
     }
     function onClickHandler2(_id, patientName, mobileNumber, email, address, aadhar, department, doctorName, appointmentTime) {
-        if (type == "admin") {
+        if (type === "admin") {
             navigate(
                 `/patient/edit/${_id}`,
                 {
@@ -66,7 +66,7 @@ function Patient({ columns, type }) {
                 }
             )
         }
-        if (type == "doctor") {
+        if (type === "doctor") {
             navigate(
                 `/doc/patient/edit/${_id}`,
                 {
@@ -79,7 +79,7 @@ function Patient({ columns, type }) {
             )
         }
 
-        if (type == "recep") {
+        if (type === "recep") {
             navigate(
                 `/recep/patient/edit/${_id}`,
                 {

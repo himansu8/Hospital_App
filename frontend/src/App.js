@@ -26,13 +26,14 @@ import ViewPatient from "./admin dashboard/patient/ViewPatient";
 import EditDoctorPage from "./admin dashboard/Doctor/EditDoctorPage";
 import EditReceptionist from "./admin dashboard/receptionist/EditReceptionist";
 import EditPatient from "./admin dashboard/patient/EditPatient";
+import Prescription from "./components/Prescription";
 //import DoctorMain from "./DoctorDashboard/doctor/DoctorMain";
 //import ReceptionistMain from "./receptionist dashboard/ReceptionistMain";
 
 function App() {
   const ProtectedRouteAdmin = ({ children }) => {
     const { user } = useContext(AuthContext)
-   console.log(user.role)
+   //console.log(user.role)
     if (!user || user.role !== "admin") {
       return <Navigate to='/' />
     }
@@ -68,6 +69,7 @@ function App() {
 
           <Route path="/about" element={<><Navbar /><About /> <Footer /></>} />
 
+          <Route path="/prescription" element={<><Prescription /> </>} />
 
 
           <Route path="/admin/dashboard" element={<><ProtectedRouteAdmin ><AdminPage type="admin" /></ProtectedRouteAdmin></>} />
@@ -105,6 +107,7 @@ function App() {
           <Route path="/doc/messages" element={<><ProtectedRoute><MessagePage type="doctor"/></ProtectedRoute></>} />
           <Route path="/recep/messages" element={<><ProtectedRouteRecep><MessagePage type="recep"/></ProtectedRouteRecep></>} />
 
+          <Route path="/jinu" element={<><Prescription/></>} />
 
 
         </Routes>

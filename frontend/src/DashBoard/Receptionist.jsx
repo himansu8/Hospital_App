@@ -34,7 +34,7 @@ function Receptionist({ columns, type }) {
         }
     }
     function onClickHandler(referenceNo) {
-        {
+        
             type === "admin" ? (
                 navigate(
                     `/receptionist/${referenceNo}`,
@@ -54,10 +54,10 @@ function Receptionist({ columns, type }) {
                 }
             )
         )
-        }
+        
     }
     function onClickHandler2(referenceNo, name, gender, email, mobile, address, password) {
-        {
+        
             type === "admin" ? (
                 navigate(
                     `/receptionist/edit/${referenceNo}`,
@@ -77,7 +77,7 @@ function Receptionist({ columns, type }) {
                 }
             )
         )
-        }
+        
 
     }
     const actionColumn = [{

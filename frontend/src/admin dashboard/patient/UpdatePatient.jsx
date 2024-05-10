@@ -36,9 +36,9 @@ function UpdatePatient({ type }) {
       console.log(res.data);
       //window.alert("Updated successfully");
       toast.success("Updated successfully")
-      if (type == "admin") { navigate("/patient") }
-      if (type == "doctor") { navigate("/doc/patient") }
-      if (type == "recep") { navigate("/recep/patient") }
+      if (type === "admin") { navigate("/patient") }
+      if (type === "doctor") { navigate("/doc/patient") }
+      if (type === "recep") { navigate("/recep/patient") }
 
     } catch (error) {
       let errorString = "";

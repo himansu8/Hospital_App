@@ -5,6 +5,8 @@ import axios from 'axios';
 import './doctor.scss'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+
+
 function DoctorDashboard({ columns }) {
     const [doctorData, setDoctorData] = useState([])
     let navigate = useNavigate();
@@ -54,7 +56,7 @@ function DoctorDashboard({ columns }) {
             }
         )
     }
-    
+
     const actionColumn = [{
         width: 250, renderCell: (params) => {
             return (
@@ -71,13 +73,15 @@ function DoctorDashboard({ columns }) {
 
 
     return (
-        <div className='datatable'>
-            <div className="datatableTitle">
-                <Link to={'/doctor/signup'} className='link'>
-                    Add New Doctor
-                </Link>
-            </div>
-            {/* <DataGrid
+        <>
+
+            <div className='datatable'>
+                <div className="datatableTitle">
+                    <Link to={'/doctor/signup'} className='link'>
+                        Add New Doctor
+                    </Link>
+                </div>
+                {/* <DataGrid
                 className='datagrid'
                 rows={data}
                 columns={userColumns.concat(actionColumn)}
@@ -85,20 +89,22 @@ function DoctorDashboard({ columns }) {
                 rowsPerPageOptions={[9, 10]}
                 checkboxSelection
             /> */}
-            <DataGrid
-                className="datagrid"
-                rows={doctorData}
-                columns={columns.concat(actionColumn)}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 9 },
-                    },
-                }}
-                pageSizeOptions={[9, 10]}
-                checkboxSelection
-                getRowId={(row) => row._id}
-            />
-        </div>
+                <DataGrid
+                    className="datagrid"
+                    rows={doctorData}
+                    columns={columns.concat(actionColumn)}
+                    initialState={{
+                        pagination: {
+                            paginationModel: { page: 0, pageSize: 9 },
+                        },
+                    }}
+                    pageSizeOptions={[9, 10]}
+                    checkboxSelection
+                    getRowId={(row) => row._id}
+                />
+            </div>
+        </>
+
     )
 }
 
