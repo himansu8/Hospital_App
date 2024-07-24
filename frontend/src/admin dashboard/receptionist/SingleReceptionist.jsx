@@ -9,7 +9,14 @@ function SingleReceptionist() {
   
     const fetchReceptionist = async (referenceNo) => {
       try {
-        let res = await axios.get(`/api/receptionist/${referenceNo}`);
+        const token = JSON.parse(localStorage.getItem('token')).token;
+        let res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/receptionist/${referenceNo}`,
+          {
+            headers:{
+                authorization:`Bearer ${token}`
+            }
+        }
+        );
         setReceptionist(res.data);
       } catch (error) {
         console.log(error);

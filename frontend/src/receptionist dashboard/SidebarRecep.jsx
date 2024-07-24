@@ -8,19 +8,20 @@ import MessageIcon from '@mui/icons-material/Message';
 import { FaUserInjured } from 'react-icons/fa';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import axios from 'axios'
+//import axios from 'axios'
 
 function SidebarRecep() {
   const { user, dispatch } = useContext(AuthContext)
   let navigate = useNavigate()
   const handleLogout = async () => {
     try {
-     
-      const removeToken = await axios.get("/api/receptionist/data/removetoken")
-      if (removeToken) {
-        dispatch({ type: "LOGOUT" })
+      let token = JSON.parse(localStorage.getItem("token")).token;
+            console.log(token, user)
+        if ( user && token){
+          localStorage.clear()
+          dispatch({ type: "LOGOUT" })
         navigate('/');
-      }
+        }
     }
     catch (error) {
       console.log(error)
@@ -29,7 +30,7 @@ function SidebarRecep() {
   return (
     <div className='sidebar'>
       <div className="top">
-        <Link to={'/doctor/dashboard'} style={{ textDecoration: "none" }}>
+        <Link to={'/recep/dashboard'} style={{ textDecoration: "none" }}>
           <span className="logo">Receptionist</span>
         </Link>
       </div>

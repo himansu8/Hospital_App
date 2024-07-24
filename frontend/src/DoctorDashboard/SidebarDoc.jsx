@@ -9,19 +9,20 @@ import { FaUserInjured } from 'react-icons/fa';
 import { MdAccessibility } from 'react-icons/md';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import axios from 'axios'
+//import axios from 'axios'
 
 function SidebarDoc() {
   const { user, dispatch } = useContext(AuthContext)
   let navigate = useNavigate()
   const handleLogout = async () => {
     try {
-     
-      const removeToken = await axios.get("/api/doctor/data/removetoken")
-      if (removeToken) {
-        dispatch({ type: "LOGOUT" })
+      let token = JSON.parse(localStorage.getItem("token")).token;
+            console.log(token, user)
+        if ( user && token){
+          localStorage.clear()
+          dispatch({ type: "LOGOUT" })
         navigate('/');
-      }
+        }
     }
     catch (error) {
       console.log(error)

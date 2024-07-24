@@ -30,13 +30,13 @@ function AdminLogin() {
     dispatch({ type: "LOGIN_START" })
       try {
           // console.log(patientData);
-          let res = await axios.post('/api/dean/login', deanData)
+          let res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/dean/login`, deanData)
           // console.log(res.data)
-          dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details })
+          const { token, details } = res.data;
+          localStorage.setItem("token", JSON.stringify({ token, details }))
+          dispatch({ type: "LOGIN_SUCCESS", payload: details })
           toast.success("You are Loged In !")
-          //localStorage.setItem("token", JSON.stringify({ token: res.data.token }))
           navigate('/admin/dashboard');
-         //window.location.href = `http://localhost:3333/admin/dashboard`
       } catch (error) {
         dispatch({ type: "LOGIN_failure", payload: error.response.data })
           let errorString = "";

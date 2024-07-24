@@ -32,8 +32,15 @@ function DoctorSignup() {
     async function onSubmit(e) {
         try {
             e.preventDefault();
-            console.log(doctorData);
-            let res = await axios.post('/api/doctor/signup', doctorData)
+            //console.log(doctorData);
+            const token = JSON.parse(localStorage.getItem('token')).token;
+            let res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/doctor/signup`, doctorData,
+                {
+                    headers:{
+                        authorization:`Bearer ${token}`
+                    }
+                }
+            )
             console.log(res.data)
             const confirmed = window.confirm("Are you submited doctor signup form?");
             if (!confirmed) return;

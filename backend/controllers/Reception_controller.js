@@ -86,10 +86,7 @@ export const receptionistLogin = async (req, res) => {
         //console.log(deanFound)
         var { password, ...otherDetails } = emailFound._doc;
 
-        res.cookie("access_token", token, {
-            httpOnly: true,
-        }).status(200).json({ details: { ...otherDetails } });
-       // res.status(200).json({ msg: `${emailFound.name} was login successfully` })
+       res.status(200).json({ msg: `${emailFound.name} was login successfully`, token, details: { ...otherDetails } })
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: "something error in login" })

@@ -28,7 +28,14 @@ function UpdateReceptionist({type}) {
     const inputData = async (e, referenceNo) => {
         try {
             e.preventDefault();
-            let res = await axios.patch(`/api/receptionist/${referenceNo}`, data);
+            const token = JSON.parse(localStorage.getItem('token')).token;
+            let res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/api/receptionist/${referenceNo}`, data,
+                {
+                    headers:{
+                        authorization:`Bearer ${token}`
+                    }
+                }
+            );
             console.log(res.data)
             //window.alert("Updated Successfully")
             toast.success("Updated successfully")
@@ -37,7 +44,7 @@ function UpdateReceptionist({type}) {
 
         } catch (error) {
             let errorString = "";
-            if (error.response.data.errors) {
+            if (error?.response?.data?.errors) {
                 error.response.data.errors.forEach((ele) => {
                     errorString += `${ele.msg} `
                 })
@@ -45,7 +52,7 @@ function UpdateReceptionist({type}) {
                 toast.error(errorString)
             }
             else {
-                errorString = error.response.data.error;
+                errorString = error?.response?.data?.error;
                 //window.alert(errorString)
                 toast.error(errorString)
             }

@@ -9,7 +9,7 @@ function Patient({ columns, type }) {
     let navigate = useNavigate();
     async function fetchPatient() {
         try {
-            let res = await axios.get('/api/patient');
+            let res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/patient`);
             console.log(res.data)
             setatient(res.data)
         } catch (error) {

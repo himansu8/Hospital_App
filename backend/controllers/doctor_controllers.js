@@ -81,22 +81,6 @@ export const doctorLogin = async (req, res) => {
             return res.status(401).json({ error: "Invalid password" })
         }
 
-        // if(emailFound.isVerified.email == false){
-        //     return res.status(404).json({err : "email not verified"})
-        // }
-
-        // if(emailFound.isVerified.phone == false){
-        //     return res.status(404).json({err : "phone not verified"})
-
-        // }
-
-        // let payload = {
-        //     user_id: doctorFound._id,
-        //     role: "doctor"
-        // }
-        // // console.log(payload)
-        // let token = generateToken(payload)
-        // //console.log(token)
 
         // res.status(200).json({ msg: `Dr ${doctorFound.name} you are logged in`, token })
         const token = jwt.sign(
@@ -106,9 +90,7 @@ export const doctorLogin = async (req, res) => {
         //console.log(deanFound)
         var { password, ...otherDetails } = doctorFound._doc;
 
-        res.cookie("access_token", token, {
-            httpOnly: true,
-        }).status(200).json({ details: { ...otherDetails } });
+        res.status(200).json({ msg: `Dr ${doctorFound.name} you are logged in`, token,details: { ...otherDetails }  })
     }
     catch (error) {
         console.log(error);

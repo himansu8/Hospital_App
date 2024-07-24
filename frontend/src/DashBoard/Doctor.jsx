@@ -12,7 +12,14 @@ function DoctorDashboard({ columns }) {
     let navigate = useNavigate();
     async function fetchDoctor() {
         try {
-            let res = await axios.get('/api/doctor');
+            const token = JSON.parse(localStorage.getItem('token')).token;
+            let res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/doctor`,
+                {
+                    headers:{
+                        authorization:`Bearer ${token}`
+                    }
+                }
+            );
             //console.log(res.data)
             //console.log(res.data?.length)
             setDoctorData(res.data)
@@ -25,7 +32,14 @@ function DoctorDashboard({ columns }) {
     }, [])
     async function deleteDoctor(doctorId) {
         try {
-            await axios.delete(`/api/doctor/${doctorId}`);
+            const token = JSON.parse(localStorage.getItem('token')).token;
+            await axios.delete(`${process.env.REACT_APP_BASE_URL}/api/doctor/${doctorId}`,
+                {
+                    headers:{
+                        authorization:`Bearer ${token}`
+                    }
+                }
+            );
             let updatedDoctor = doctorData.filter((ele) => ele._id !== doctorId);
             setDoctorData(updatedDoctor);             //Refersh the doctor database after deleted
             //window.alert(`Successfully Deleted`)

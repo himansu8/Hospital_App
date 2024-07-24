@@ -12,7 +12,14 @@ function Receptionist({ columns, type }) {
     let navigate = useNavigate();
     async function fetchReceptionist() {
         try {
-            let res = await axios.get('/api/receptionist');
+            const token = JSON.parse(localStorage.getItem('token')).token;
+            let res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/receptionist`,
+                {
+                    headers:{
+                        authorization:`Bearer ${token}`
+                    }
+                }
+            );
             console.log(res.data)
             setReceptionist(res.data)
         } catch (error) {
@@ -24,7 +31,14 @@ function Receptionist({ columns, type }) {
     }, [])
     async function deleteReceptionist(referenceNo) {
         try {
-            await axios.delete(`/api/receptionist/${referenceNo}`);
+            const token = JSON.parse(localStorage.getItem('token')).token;
+            await axios.delete(`${process.env.REACT_APP_BASE_URL}/api/receptionist/${referenceNo}`,
+                {
+                    headers:{
+                        authorization:`Bearer ${token}`
+                    }
+                }
+            );
             let updatedReceptionist = receptionist.filter((ele) => ele._id !== referenceNo);
             setReceptionist(updatedReceptionist);             //Refersh the doctor database after deleted
             //window.alert(`Successfully Deleted`)

@@ -27,7 +27,9 @@ function ReceptionistLogin() {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" })
     try {
-      let res = await axios.post('/api/receptionist/login', data)
+      let res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/receptionist/login`, data)
+      const {token, details} =  res.data;
+      localStorage.setItem("token", JSON.stringify({token, details}))
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details })
       toast.success("You are Loged In !")
       navigate('/recep/dashboard');

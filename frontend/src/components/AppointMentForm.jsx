@@ -38,7 +38,7 @@ function AppointMentForm() {
   useEffect(() => {
     const fetchDoctors = async () => {
       const { data } = await axios.get(
-        "/api/doctor/data/doctors",
+        `${process.env.REACT_APP_BASE_URL}/api/doctor/data/doctors`,
         { withCredentials: true }
       );
       setDoctors(data);
@@ -57,7 +57,7 @@ function AppointMentForm() {
     try {
       e.preventDefault();
       console.log(patientData);
-      let res = await axios.post('/api/patient', patientData)
+      let res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/patient`, patientData)
       console.log(res.data)
       const confirmed = window.confirm("Are you submited your form?");
       if (!confirmed) return;

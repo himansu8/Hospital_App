@@ -32,7 +32,14 @@ function UpdatePatient({ type }) {
   const inputData = async (e, referenceNo) => {
     try {
       e.preventDefault();
-      let res = await axios.patch(`/api/patient/${referenceNo}`, data);
+      const token = JSON.parse(localStorage.getItem('token')).token;
+      let res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/api/patient/${referenceNo}`, data,
+        {
+          headers:{
+              authorization:`Bearer ${token}`
+          }
+      }
+      );
       console.log(res.data);
       //window.alert("Updated successfully");
       toast.success("Updated successfully")
@@ -42,7 +49,7 @@ function UpdatePatient({ type }) {
 
     } catch (error) {
       let errorString = "";
-      if (error.response.data.errors) {
+      if (error?.response?.data?.errors) {
         error.response.data.errors.forEach((ele) => {
           errorString += `${ele.msg} `;
         });
@@ -50,7 +57,7 @@ function UpdatePatient({ type }) {
         toast.error(errorString)
 
       } else {
-        errorString = error.response.data.error;
+        errorString = error?.response?.data?.error;
         // window.alert(errorString);
         toast.error(errorString)
 

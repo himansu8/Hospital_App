@@ -19,7 +19,7 @@ function UpdateDoctor() {
         newEmail: email,
         newDepartment: department
     })
-    console.log(data)
+    //console.log(data)
     function onChangeHandler(e) {
         //console.log(e.target.name, e.target.value)
         setData({
@@ -31,7 +31,14 @@ function UpdateDoctor() {
         try {
             e.preventDefault();
             //console.log(token)
-            let res = await axios.patch(`/api/doctor/${doctorId}`, data);
+            const token = JSON.parse(localStorage.getItem('token')).token;
+            let res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/api/doctor/${doctorId}`, data,
+                {
+                    headers:{
+                      authorization:`Bearer ${token}`
+                  }
+                  }
+            );
             console.log(res.data)
             //window.alert("Updated successfully");
             toast.success("Updated successfully")
@@ -39,7 +46,7 @@ function UpdateDoctor() {
         } catch (error) {
             let errorString = "";
             //handling express validator errors
-            if (error.response.data.errors) {
+            if (error?.response?.data?.errors) {
                 error.response.data.errors.forEach((ele) => {
                     errorString += `${ele.msg} `
                 })
@@ -53,7 +60,7 @@ function UpdateDoctor() {
             }
             else {
                 //Custom errors
-                errorString = error.response.data.error;
+                errorString = error?.response?.data?.error;
                 // showAlert({
                 //   type: "error",
                 //   msg: errorString

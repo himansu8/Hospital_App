@@ -10,7 +10,14 @@ function SinglePatient() {
     const fetchPatient = async (referenceNo) => {
 
         try {
-            let res = await axios.get(`/api/patient/${referenceNo}`);
+          const token = JSON.parse(localStorage.getItem('token')).token;
+            let res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/patient/${referenceNo}`,
+              {
+                headers:{
+                    authorization:`Bearer ${token}`
+                }
+            }
+            );
             setPatient(res.data);
             //console.log(res.data)
         } catch (error) {

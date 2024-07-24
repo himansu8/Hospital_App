@@ -32,8 +32,15 @@ function ReceptionistSignup({type}) {
   async function onSubmit(e) {
     try {
       e.preventDefault();
-      console.log(data);
-      let res = await axios.post('/api/receptionist/signup', data)
+      //console.log(data);
+      const token = JSON.parse(localStorage.getItem('token')).token;
+      let res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/receptionist/signup`, data,
+        {
+          headers:{
+              authorization:`Bearer ${token}`
+          }
+      }
+      )
       console.log(res.data)
       const confirmed = window.confirm("Are you submited the signup form?");
       if (!confirmed) return;

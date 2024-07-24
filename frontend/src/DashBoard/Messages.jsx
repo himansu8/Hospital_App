@@ -6,7 +6,14 @@ function Messages() {
     useEffect(() => {
         const fetchMessages = async () => {
           try {
-            const { data } = await axios.get("/api/message/getall");
+            const token = JSON.parse(localStorage.getItem('token')).token;
+            const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/message/getall`,
+              {
+                headers:{
+                    authorization:`Bearer ${token}`
+                }
+            }
+            );
             //console.log(data)
             setMessages(data);
           } catch (error) {

@@ -9,7 +9,14 @@ function SingleDoctor() {
 
   const fetchDoctor = async (doctorId) => {
     try {
-      let res = await axios.get(`/api/doctor/${doctorId}`);
+      const token = JSON.parse(localStorage.getItem('token')).token;
+      let res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/doctor/${doctorId}`,
+        {
+          headers:{
+            authorization:`Bearer ${token}`
+        }
+        }
+      );
       setDoctor(res.data);
     } catch (error) {
       console.log(error);

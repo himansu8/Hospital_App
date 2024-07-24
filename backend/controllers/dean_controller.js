@@ -73,35 +73,15 @@ export const deanLogin = async (req, res) => {
             return res.status(401).json({ error: "Invalid password" })
         }
 
-        // if(emailFound.isVerified.email == false){
-        //     return res.status(404).json({err : "email not verified"})
-        // }
 
-        // if(emailFound.isVerified.phone == false){
-        //     return res.status(404).json({err : "phone not verified"})
-
-        // }
-
-        // let payload = {
-        //     user_id: deanFound._id,
-        //     role : "dean"
-        // }
-        // // console.log(payload)
-        // let token = generateToken(payload)
-        // //console.log(token)
-        // res.status(200).send({ msg: `Dr ${deanFound.name} you are logged in`, token })
-
-        // res.status(200).json({ msg: {deanFound}, token })
         const token = jwt.sign(
             { user_id: deanFound._id, role: "dean" },
             config.PRIVATE_KEY
         );
-        //console.log(deanFound)
+       
         var { password, ...otherDetails } = deanFound._doc;
-
-        res.cookie("access_token", token, {
-            httpOnly: true,
-        }).status(200).json({ details: { ...otherDetails } });
+        res.status(200).json({ msg: `Dr ${deanFound.name} you are logged in`, token, details: { ...otherDetails } })
+       
 
 
     }
