@@ -155,7 +155,7 @@ export async function deleteDoctor(req, res){
             return res.status(400).json({ error: "please find the valid doctor id" })
         }
         let deleteDoc = await Doctormodel.findByIdAndDelete({_id : doctorId})
-    console.log(deleteDoc)
+    // console.log(deleteDoc)
     if(!deleteDoc){
         return res.status(404).json({error:"Doctor not found"})
     }

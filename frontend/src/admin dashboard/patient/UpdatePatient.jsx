@@ -21,7 +21,7 @@ function UpdatePatient({ type }) {
     newDoctorName: doctorName,
     newAppointmentTime: appointmentTime,
   });
-  console.log(appointmentTime);
+ // console.log(appointmentTime);
   function onChangeHandler(e) {
     setData({
       ...data,
@@ -33,14 +33,14 @@ function UpdatePatient({ type }) {
     try {
       e.preventDefault();
       const token = JSON.parse(localStorage.getItem('token')).token;
-      let res = await axios.put(`${process.env.REACT_APP_BASE_URL}/api/patient/${referenceNo}`, data,
+      await axios.put(`${process.env.REACT_APP_BASE_URL}/api/patient/${referenceNo}`, data,
         {
           headers:{
               authorization:`Bearer ${token}`
           }
       }
       );
-      console.log(res.data);
+     // console.log(res.data);
       //window.alert("Updated successfully");
       toast.success("Updated successfully")
       if (type === "admin") { navigate("/patient") }

@@ -8,7 +8,7 @@ import NavbarDoc from '../../DoctorDashboard/NavbarDoc'
 
 
 function ReceptionistPage({ columns,type }) {
-  console.log(type)
+ // console.log(type)
   return (
 <div className='list'>
       {type === "admin" && (

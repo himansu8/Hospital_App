@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 function UpdateDoctor() {
     let navigate = useNavigate();
     const { state } = useLocation();
-    console.log(state)
+    //console.log(state)
     const { _id, name, mobile, address, email, department } = state
     const doctorId = _id
 
@@ -32,14 +32,14 @@ function UpdateDoctor() {
             e.preventDefault();
             //console.log(token)
             const token = JSON.parse(localStorage.getItem('token')).token;
-            let res = await axios.put(`${process.env.REACT_APP_BASE_URL}/api/doctor/${doctorId}`, data,
+            await axios.put(`${process.env.REACT_APP_BASE_URL}/api/doctor/${doctorId}`, data,
                 {
                     headers:{
                       authorization:`Bearer ${token}`
                   }
                   }
             );
-            console.log(res.data)
+           // console.log(res.data)
             //window.alert("Updated successfully");
             toast.success("Updated successfully")
             navigate("/doctor");

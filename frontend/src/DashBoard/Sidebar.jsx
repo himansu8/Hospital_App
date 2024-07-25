@@ -19,7 +19,7 @@ function Sidebar() {
   const handleLogout = async () => {
     try {
       let token = JSON.parse(localStorage.getItem("token")).token;
-            console.log(token, user)
+         //   console.log(token, user)
         if ( user && token){
           localStorage.clear()
           dispatch({ type: "LOGOUT" })

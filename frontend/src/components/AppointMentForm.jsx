@@ -42,7 +42,7 @@ function AppointMentForm() {
         { withCredentials: true }
       );
       setDoctors(data);
-      console.log(data);
+     // console.log(data);
     };
     fetchDoctors();
   }, []);
@@ -56,9 +56,9 @@ function AppointMentForm() {
   async function onSubmit(e) {
     try {
       e.preventDefault();
-      console.log(patientData);
-      let res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/patient`, patientData)
-      console.log(res.data)
+      //console.log(patientData);
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/api/patient`, patientData)
+     // console.log(res.data)
       const confirmed = window.confirm("Are you submited your form?");
       if (!confirmed) return;
       window.alert("Thank You For chossing us. Your Appointment details are send to your mail")

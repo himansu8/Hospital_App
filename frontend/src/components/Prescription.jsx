@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 function Prescription() {
     const location = useLocation();
     const patientData = location.state;
-console.log(patientData)
+//console.log(patientData)
     const handlePrint = () => {
         window.print();
     };

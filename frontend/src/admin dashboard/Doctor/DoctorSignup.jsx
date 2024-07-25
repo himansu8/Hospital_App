@@ -34,14 +34,14 @@ function DoctorSignup() {
             e.preventDefault();
             //console.log(doctorData);
             const token = JSON.parse(localStorage.getItem('token')).token;
-            let res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/doctor/signup`, doctorData,
+            await axios.post(`${process.env.REACT_APP_BASE_URL}/api/doctor/signup`, doctorData,
                 {
                     headers:{
                         authorization:`Bearer ${token}`
                     }
                 }
             )
-            console.log(res.data)
+           // console.log(res.data)
             const confirmed = window.confirm("Are you submited doctor signup form?");
             if (!confirmed) return;
             window.alert("Thank You")

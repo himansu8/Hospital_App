@@ -10,7 +10,7 @@ function Patient({ columns, type }) {
     async function fetchPatient() {
         try {
             let res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/patient`);
-            console.log(res.data)
+         //   console.log(res.data)
             setatient(res.data)
         } catch (error) {
             console.log(error)

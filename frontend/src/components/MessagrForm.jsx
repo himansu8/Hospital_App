@@ -20,11 +20,11 @@ function onChangeHandler(e) {
   const onSubmit = async (e) => {
     try{
       e.preventDefault();
-      console.log(senderData)
+      //console.log(senderData)
       const confirmed = window.confirm("Are you send your message?");
       if (!confirmed) return;
-      let res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message/send`, senderData)
-      console.log(res.data)
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/api/message/send`, senderData)
+     // console.log(res.data)
         setSenderData({
           firstName:"",
           lastName:"",

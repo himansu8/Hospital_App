@@ -20,7 +20,7 @@ function Receptionist({ columns, type }) {
                     }
                 }
             );
-            console.log(res.data)
+          //  console.log(res.data)
             setReceptionist(res.data)
         } catch (error) {
             console.log(error)

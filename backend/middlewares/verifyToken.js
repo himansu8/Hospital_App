@@ -36,7 +36,7 @@ export function verifyToken(req, res, next) {
   //console.log("header------------",req.headers.authorization);
   //console.log(req.headers)
   const token = req.headers.authorization.split(" ")[1]
-  console.log("cookiesss token:::", token)
+  //console.log("cookiesss token:::", token)
   if (!token) {
     return res.status(401).json({error:"You are not authenticated!"}) ;
   }
