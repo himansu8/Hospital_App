@@ -15,7 +15,7 @@ routes.post('/availability',isDoctor, addAvailability);
 routes.get('/:doctorId',verifyAdmin, viewDoctorData);
 routes.get('/',verifyAdmin, allDoctorData);
 routes.get('/data/doctors', allDoctorData);
-routes.patch('/:doctorId',verifyAdmin,updateDoctorData);
+routes.put('/:doctorId',verifyAdmin,updateDoctorData);
 routes.delete('/:doctorId',verifyAdmin, deleteDoctor );
 routes.get("/data/removetoken",logoutTokenDoc )
 export default routes

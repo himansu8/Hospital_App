@@ -7,14 +7,15 @@ function Biography({ imgUrl }) {
         <img src={imgUrl} alt="about" />
       </div>
       <div className="banner">
-        <p>Biography</p>
-        <h3>Who We Are</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam ipsum suscipit non provident error. Perferendis a odit nobis ullam autem sed ipsam nulla repudiandae, sint illum accusantium eius fuga tenetur.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        <p>Lorem ipsum dolor sit amet.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit excepturi minus distinctio? Sunt architecto dignissimos neque repellendus aliquid, sint voluptatem beatae similique minima aliquam totam in eaque aperiam excepturi, dicta illo! Molestias voluptate tenetur veritatis!</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur commodi cum quidem.</p>
-        <p>Lorem, ipsum dolor.</p>
+        <p style={{ color: '#4682B4' }}> Biography</p>
+        <h3 style={{ color: '#4682B4' }}>Who We Are</h3>
+        <p>Welcome to Apna Hospital, where your health and well-being are our top priorities. At Apna Hospital, we are dedicated to providing exceptional healthcare services with compassion, excellence, and innovation. Our mission is to enhance the quality of life for our patients by delivering comprehensive medical care and fostering a patient-centered environment.</p>
+        
+        <br/>
+        <p>Our team of experienced doctors, skilled nurses, and compassionate support staff work collaboratively to offer a wide range of medical services tailored to meet the diverse needs of our community. We are committed to ongoing education and the adoption of the latest medical advancements to ensure the highest standards of care.</p>
+         <br/>
+        <p>At Apna Hospital, we believe in treating every patient with kindness, empathy, and respect. Thank you for choosing us as your trusted healthcare partner.</p>
+
       </div>
     </div>
   )

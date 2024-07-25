@@ -21,15 +21,15 @@ function Navbar() {
           <FaHospital style={{ marginRight: '10px', fontSize: '36px' }} />
           <span style={{ fontSize: '28px', fontWeight: 'bold' }}>ApnaHospital</span>
         </div>
-        <div className={show ? 'navLinks showmenu' : 'navLinks'}>
-          <div className="links">
-            <Link to={'/'} onClick={toggleMenu}>
+        <div className={show ? 'navLinks showmenu' : 'navLinks'}  >
+          <div className="links" >
+            <Link to={'/'} onClick={toggleMenu} style={{ color: '#007bff'}}>
               Home
             </Link>
-            <Link to={'/appointment'} onClick={toggleMenu}>
+            <Link to={'/appointment'} onClick={toggleMenu} style={{ color: '#007bff'}}>
               Appointment
             </Link>
-            <Link to={'/about'} onClick={toggleMenu}>
+            <Link to={'/about'} onClick={toggleMenu} style={{ color: '#007bff'}}>
               About Us
             </Link>
           </div>

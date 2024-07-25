@@ -7,7 +7,7 @@ import MessageForm from '../components//MessagrForm'
 function Home() {
   return (
 <>
-<Hero title={"Welcome to Apna Hospital | Your Trusted Healtcare provider"} imgUrl={"/hero.png"}/>
+<Hero title={"Welcome to Apna Hospital | Your Trusted Healtcare provider | 🏥"} imgUrl={"/hero.png"}/>
 <Biography imgUrl={"/about.png"}/>
 <Department/>
 <MessageForm/>

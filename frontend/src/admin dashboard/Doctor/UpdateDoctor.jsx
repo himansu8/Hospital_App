@@ -32,7 +32,7 @@ function UpdateDoctor() {
             e.preventDefault();
             //console.log(token)
             const token = JSON.parse(localStorage.getItem('token')).token;
-            let res = await axios.patch(`${process.env.REACT_APP_BASE_URL}/api/doctor/${doctorId}`, data,
+            let res = await axios.put(`${process.env.REACT_APP_BASE_URL}/api/doctor/${doctorId}`, data,
                 {
                     headers:{
                       authorization:`Bearer ${token}`

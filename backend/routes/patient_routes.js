@@ -26,7 +26,7 @@ description: update patient data
 method :patch
 api_url: api/patient/:referenceNo
 */
-router.patch('/:referenceNo',updatePatientData);
+router.put('/:referenceNo',updatePatientData);
 
 /*
 description: get Patient

@@ -11,7 +11,7 @@ routes.post('/login',receptionistLoginValidation(),validationErrors,receptionist
 routes.get('/:referenceNo',verifyAdminAndDoctor,singleReceptionistData)
 routes.get('/',verifyAdminAndDoctor, allReceptionistData );
 routes.delete('/:referenceNo',verifyAdminAndDoctor,deleteReceptionist)
-routes.patch('/:referenceNo',verifyAdminAndDoctor,updateReceptionist)
+routes.put('/:referenceNo',verifyAdminAndDoctor,updateReceptionist)
 routes.get("/data/removetoken",logoutTokenRecep )
 
 export default routes
