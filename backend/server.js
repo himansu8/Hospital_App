@@ -13,14 +13,14 @@ const app = express();
 const port = 3001;
 app.use(express.json());
 const corsOptions = {
-    origin: 'http://localhost:3000', // Replace with your frontend's origin
+    origin: ['http://localhost:3000','https://hospital-client-mu.vercel.app','https://apnahospital.himansu.in' ],// Replace with your frontend's origin
     credentials: true, // Allow credentials
     methods: ['OPTIONS','GET', 'POST', 'PUT', 'PATCH', 'DELETE' ],
 };
 app.use(cors(corsOptions));
 //app.use(cookieParser())
 
-//app.options('*', cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 app.get('/', (req, res) => {
     res.status(200).send("server started up fine")
